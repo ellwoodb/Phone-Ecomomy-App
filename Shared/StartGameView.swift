@@ -77,15 +77,6 @@ struct StartGameView: View {
             }
         }
         .padding(/*@START_MENU_TOKEN@*/[.leading, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
-        .actionSheet(isPresented: $appState.factoriesUnderOne) {
-            ActionSheet(
-                title: Text("Actions"),
-                message: Text("Achtung"),
-                buttons: [
-                    .default(Text("Actishdjahf"))
-                ]
-            )
-        }
     }
 }
 

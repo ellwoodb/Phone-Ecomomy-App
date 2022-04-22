@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  StartGameView.swift
 //  Shared
 //
 //  Created by Matthias Müller on 20.04.22.
@@ -13,7 +13,6 @@ enum Ages {
 
 struct StartGameView: View {
     @EnvironmentObject var appState: AppState
-    
     @State public var selectedAges = Ages.balanced
     
     public var age: [Float] {
@@ -33,7 +32,7 @@ struct StartGameView: View {
                 .font(.title)
                 .padding(.bottom, 50.0)
             
-            //Budget Auswahl
+            // Budget Auswahl
             HStack {
                 Text("Startbudget: ")
                     .font(.title2)
@@ -45,7 +44,7 @@ struct StartGameView: View {
             }
             Slider(value: $appState.budget, in: 0...1000000, step: 5)
             
-            //Population Auswahl
+            // Population Auswahl
             HStack {
                 Text("Kunden: ")
                     .font(.title2)
@@ -56,7 +55,7 @@ struct StartGameView: View {
             }
             Slider(value: $appState.population, in: 0...100000, step: 100)
             
-            //Agedistr Auswahl
+            // Agedistr Auswahl
             Text("Alter: ")
                 .font(.title2)
             Picker("Alter", selection: $selectedAges) {
@@ -69,8 +68,10 @@ struct StartGameView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             
+            // Fabriken kaufen
             Stepper("Fabriken: \(Int(appState.factories))", value: $appState.factories)
-
+            
+            // Wechselt zu PhoneCreationView und speichert Altersverteilungen
             Button("Start Simulation!"){
                 appState.ageDistr = age
                 appState.hasOnboarded = true

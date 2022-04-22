@@ -41,6 +41,7 @@ struct OnboardingFlowTestApp: App {
     @ObservedObject var appState = AppState(hasOnboarded: false, hasLauched: false, budget: 0, population: 0, ageDistr: [0, 0, 0], phonePrice: 0, phoneCount: 0, popularity: [0, 0, 0], factories: 1)
     
     var body: some Scene {
+        // Wechseln der verschiedenen Views
         WindowGroup {
             if !appState.hasOnboarded && !appState.hasLauched {
                 StartGameView()

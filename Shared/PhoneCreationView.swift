@@ -1,5 +1,5 @@
 //
-//  MainGameView.swift
+//  PhoneCreationView.swift
 //  WirtschaftsSimulation
 //
 //  Created by Matthias Müller on 21.04.22.
@@ -37,7 +37,6 @@ struct PhoneCreationView: View {
         }
     }
     
-    
     public var os: [Float] {
         switch selectedOs {
         case .easy:
@@ -49,6 +48,7 @@ struct PhoneCreationView: View {
         }
     }
     
+    // Berechnet ob der random ermittelte Preis eines Konkurrenten besser oder schlechter war als der eigene und passt die Popularity an
     func priceVsCompetitor(price: Float) -> Float {
         let randomPrice: Float = Float.random(in: price - 100...price + 100)
         
@@ -63,6 +63,7 @@ struct PhoneCreationView: View {
         }
     }
     
+    // Berechnet die Popularity für die verschiedenen Altersgruppen
     func phonePopularityByAge(quality: Float, price: Float, os: [Float]) -> [Float] {
         var popularity: [Float] = []
         let priceMod: Float = priceVsCompetitor(price: price)
@@ -102,6 +103,7 @@ struct PhoneCreationView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             
+            // Preis für Handys festlegen
             HStack {
                 Text("Preis: ")
                     .font(.title2)
@@ -113,6 +115,7 @@ struct PhoneCreationView: View {
             }
             Slider(value: $appState.phonePrice, in: 0...2000, step: 50)
             
+            // Menge an zu produzierenden Handys festlegen
             HStack {
                 Text("Menge: ")
                     .font(.title2)
@@ -123,6 +126,7 @@ struct PhoneCreationView: View {
             }
             Slider(value: $appState.phoneCount, in: 0...100000, step: 100)
             
+            // OS Picker TODO: Usern feedback zu geben, welches OS besser ist bzw. was die Unterschiede sind
             Picker("OS", selection: $selectedOs) {
                 Text("Einfach")
                     .tag(Oss.easy)
@@ -134,6 +138,7 @@ struct PhoneCreationView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             
+            // Wechselt zu SalesView und speichert die Popularity
             Button("Lauch"){
                 appState.hasLauched = true
                 appState.popularity = phonePopularityByAge(quality: qualitie, price: appState.phonePrice, os: os)
